@@ -1,6 +1,9 @@
 # React Advanced
 
 ## 1. Rendering
+
+### References
+- [왜 useCallback, React.memo, useMemo를 사용할까?(리랜더링 줄이기 전략)](https://www.youtube.com/watch?v=HHKV9XbXUOw)
     
 리액트에서 화면의 렌더링을 야기하는 요인들은 다음과 같다.
 - state(setState) 의 변경
@@ -122,3 +125,75 @@ const log = useCallback(() => console.log('re'), []);
 
 
 ### React.memo
+
+```typescript
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+
+export default function ComponentMemo() {
+  const [count, setCount] = useState<number>(0);
+  const increment = () => setCount((prev) => prev + 1);
+  const propsFn = () => {};
+  return (
+    <section>
+      <button>
+        <Link to={'/rendering'}>Go to Rendering page</Link>
+      </button>
+      <p>count : {count}</p>
+      <button onClick={increment}>Increment</button>
+      <ChildComponent onClick={propsFn} />
+    </section>
+  );
+}
+
+const ChildComponent = ({ onClick }: { onClick: () => void }) => {
+  console.log('child component is rendering!');
+  return <button onClick={onClick}>Child component</button>;
+};
+```
+간단한 부모자식의 관계로 이루어진 컴포넌트이다. 자식 컴포넌트에 전달된 함수는 부모컴포넌트에서 사용되는 변수인 `count`, `setCount`와 관련이 전혀 없는 함수이다.
+
+이때, Increment 버튼을 클릭하면 과연 자식컴포넌트의 `console.log`는 다시 찍힐까?
+
+당연히, 부모 컴포넌트에서 사용되는 상태의 변화로 부모 컴포넌트가 리렌더링 되면서 자식 컴포넌트 또한 리렌더링된다.
+
+이때, 변경되는 상태와 관련이 없는 `propsFn` 는 변경이 없어 보이지만, 실제로 리렌더링시 원래 할당되어 있던 메모리 주소와 다른 곳에 할당되기 때문에 자식 컴포넌트에서는 props 의 변경이 일어났다고 인식힌다.
+
+그런데, 자식 컴포넌트는 변하는 상태값과 전혀 관련이 없기에, props 와 관련이 없는 상태의 변경에는 자식 컴포넌트는 리렌더링 시키지 않고 싶다면 어떻게 해야할까?
+
+우리가 해야할 일은 2가지이다.
+1. **`propsFn`을 캐싱하기**
+2. **자식 컴포넌트를 캐싱하기**
+
+`propsFn`을 캐싱하는 것은 위에서 우리가 사용한 `useCallback` 훅을 사용하면 된다. 그렇다면 자식 컴포넌트를 캐싱하는것은?
+이것이 바로 `React.memo` 이다.
+
+```typescript
+import React, { useCallback, useState } from 'react';
+import { Link } from 'react-router-dom';
+
+export default function ComponentMemo() {
+  const [count, setCount] = useState<number>(0);
+  const increment = () => setCount((prev) => prev + 1);
+  const propsFn = useCallback(() => {}, []);
+  return (
+    <section>
+      <button>
+        <Link to={'/rendering'}>Go to Rendering page</Link>
+      </button>
+      <p>count : {count}</p>
+      <button onClick={increment}>Increment</button>
+      <ChildComponent onClick={propsFn} />
+    </section>
+  );
+}
+
+const ChildComponent = React.memo(({ onClick }: { onClick: () => void }) => {
+  console.log('child component is rendering!');
+  return <button onClick={onClick}>Child component</button>;
+});
+```
+
+수정 후의 코드를 보면 `propsFn`을 `useCallback`을 사용하여 캐싱한다. 여기까지 했다면 리액트 랜더링의 `commit phase`에 대해서는 최적화가 이루어졌다.
+
+하지만 아직 `render phase`에 대한 최적화가 이루어지지 않았고, 이것을 바로 `React.memo`를 통하여 최적화를 실시해주면 비로소 버튼 클릭시 자식 컴포넌트가 리렌더링 되지 않는 것을 확인 할 수 있다.. 

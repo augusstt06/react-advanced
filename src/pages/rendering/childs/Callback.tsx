@@ -19,8 +19,3 @@ export default function Callback() {
     </section>
   );
 }
-
-// function ChildComponent({ onClick }: { onClick: () => void }) {
-//   console.log('child component is rendering!');
-//   return <button onClick={onClick}>Child component</button>;
-// }
