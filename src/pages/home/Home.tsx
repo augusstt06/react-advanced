@@ -4,9 +4,14 @@ export default function Home() {
   return (
     <main>
       <h2>Category List</h2>
-      <button>
-        <Link to={'/rendering'}>Rendering</Link>
-      </button>
+      <section style={{ display: 'flex', gap: '10px' }}>
+        <button>
+          <Link to={'/rendering'}>Rendering</Link>
+        </button>
+        <button>
+          <Link to={'/context'}>Context</Link>
+        </button>
+      </section>
     </main>
   );
 }
