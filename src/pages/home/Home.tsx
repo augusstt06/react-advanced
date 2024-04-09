@@ -11,6 +11,9 @@ export default function Home() {
         <button>
           <Link to={'/context'}>Context</Link>
         </button>
+        <button>
+          <Link to={'/boundary'}>Error Boundary</Link>
+        </button>
       </section>
     </main>
   );

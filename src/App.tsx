@@ -1,6 +1,7 @@
 import './App.css';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
+import Boundary from '@/pages/boundary/Boundary.tsx';
 import { Context } from '@/pages/context/Context.tsx';
 import Home from '@/pages/home/Home.tsx';
 import Callback from '@/pages/rendering/childs/Callback.tsx';
@@ -18,6 +19,7 @@ function App() {
         <Route path='/rendering/callback' element={<Callback />} />
         <Route path='/rendering/component' element={<ComponentMemo />} />
         <Route path='/context' element={<Context />} />
+        <Route path='/boundary' element={<Boundary />} />
       </Routes>
     </BrowserRouter>
   );
