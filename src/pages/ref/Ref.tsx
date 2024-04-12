@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 
-import ForwardComponent from '@/pages/ref/childs/Foward.tsx';
+import ForwardComponent from '@/pages/ref/childs/Forward.tsx';
 
 export default function Ref() {
   /* ref
