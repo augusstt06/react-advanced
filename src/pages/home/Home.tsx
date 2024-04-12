@@ -14,6 +14,9 @@ export default function Home() {
         <button>
           <Link to={'/boundary'}>Error Boundary</Link>
         </button>
+        <button>
+          <Link to={'/ref'}>Ref</Link>
+        </button>
       </section>
     </main>
   );

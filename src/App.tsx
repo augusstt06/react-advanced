@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Boundary from '@/pages/boundary/Boundary.tsx';
 import { Context } from '@/pages/context/Context.tsx';
 import Home from '@/pages/home/Home.tsx';
+import Ref from '@/pages/ref/Ref.tsx';
 import Callback from '@/pages/rendering/childs/Callback.tsx';
 import ComponentMemo from '@/pages/rendering/childs/ComponentMemo.tsx';
 import Memo from '@/pages/rendering/childs/Memo.tsx';
@@ -20,6 +21,7 @@ function App() {
         <Route path='/rendering/component' element={<ComponentMemo />} />
         <Route path='/context' element={<Context />} />
         <Route path='/boundary' element={<Boundary />} />
+        <Route path='/ref' element={<Ref />} />
       </Routes>
     </BrowserRouter>
   );
