@@ -11,6 +11,7 @@ const ForwardComponent = forwardRef((props: ForwardProps, ref: ForwardedRef<HTML
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     setDialogText(e.target.value);
   };
+
   return (
     <dialog ref={ref}>
       <h1>Child Dialog Component</h1>
