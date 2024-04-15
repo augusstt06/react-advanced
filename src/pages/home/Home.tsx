@@ -17,6 +17,9 @@ export default function Home() {
         <button>
           <Link to={'/ref'}>Ref</Link>
         </button>
+        <button>
+          <Link to={'/portal'}>Portal</Link>
+        </button>
       </section>
     </main>
   );

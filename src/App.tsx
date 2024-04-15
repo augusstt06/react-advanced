@@ -9,6 +9,7 @@ import Callback from '@/pages/rendering/childs/Callback.tsx';
 import ComponentMemo from '@/pages/rendering/childs/ComponentMemo.tsx';
 import Memo from '@/pages/rendering/childs/Memo.tsx';
 import Rendering from '@/pages/rendering/Rendering.tsx';
+import Portal from '@/portal/Portal.tsx';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path='/context' element={<Context />} />
         <Route path='/boundary' element={<Boundary />} />
         <Route path='/ref' element={<Ref />} />
+        <Route path='/portal' element={<Portal />} />
       </Routes>
     </BrowserRouter>
   );
