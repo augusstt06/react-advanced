@@ -4,7 +4,7 @@ Portal - React 에서 컴포넌트를 렌더링 하는 위치를 사전에 선�
 
 import { useState } from 'react';
 
-import { Modal, PortalModal } from '@/portal/childs/Modal.tsx';
+import { Modal, PortalModal } from '@/pages/portal/childs/Modal.tsx';
 
 export default function Portal() {
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);

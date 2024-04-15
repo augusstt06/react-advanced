@@ -4,12 +4,13 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import Boundary from '@/pages/boundary/Boundary.tsx';
 import { Context } from '@/pages/context/Context.tsx';
 import Home from '@/pages/home/Home.tsx';
+import Optimization from '@/pages/optimization';
+import Portal from '@/pages/portal/Portal.tsx';
 import Ref from '@/pages/ref/Ref.tsx';
 import Callback from '@/pages/rendering/childs/Callback.tsx';
 import ComponentMemo from '@/pages/rendering/childs/ComponentMemo.tsx';
 import Memo from '@/pages/rendering/childs/Memo.tsx';
 import Rendering from '@/pages/rendering/Rendering.tsx';
-import Portal from '@/portal/Portal.tsx';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
         <Route path='/boundary' element={<Boundary />} />
         <Route path='/ref' element={<Ref />} />
         <Route path='/portal' element={<Portal />} />
+        <Route path='/optimization' element={<Optimization />} />
       </Routes>
     </BrowserRouter>
   );
